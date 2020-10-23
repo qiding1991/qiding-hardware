@@ -32,7 +32,8 @@ public class QidingHardwareConfig {
 
     @Bean
     public  List<ChannelHandler> channelHandler(HardwareInfoDb dataStore) {
-        return Stream.of(new StringDecoder(), new StringEncoder(), new MyChannelHandler(dataStore)).collect(Collectors.toList());
+        //return Stream.of(new StringDecoder(), new StringEncoder(), new MyChannelHandler(dataStore)).collect(Collectors.toList());
+        return Stream.of( new MyChannelHandler(dataStore)).collect(Collectors.toList());
     }
 
     @Bean

@@ -8,15 +8,20 @@ import java.util.function.Consumer;
  * @author <qiding@kuaishou.com>
  * Created on 2020-10-22
  */
-public class HardwareInfoDb implements Consumer<String> {
-    List<String> hardwareInfo=new ArrayList<>();
+public class HardwareInfoDb implements Consumer<byte[]> {
+    List<byte[]> hardwareInfo = new ArrayList<>();
 
-    public List<String> getHardwareInfo() {
+    public List<byte[]> getHardwareInfo() {
         return hardwareInfo;
     }
 
     @Override
-    public void accept(String data) {
+    public void accept(byte[] data) {
         hardwareInfo.add(data);
+    }
+
+
+    public void clean(){
+        hardwareInfo.clear();
     }
 }

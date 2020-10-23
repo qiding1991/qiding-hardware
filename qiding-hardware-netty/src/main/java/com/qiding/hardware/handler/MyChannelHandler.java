@@ -1,27 +1,31 @@
 package com.qiding.hardware.handler;
 
-import java.util.function.Consumer;
-
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+
+import java.util.function.Consumer;
 
 /**
  * @author <qiding@kuaishou.com>
  * Created on 2020-10-22
  */
+@ChannelHandler.Sharable
 public class MyChannelHandler extends ChannelInboundHandlerAdapter {
 
-    private Consumer<String> consumer;
+    private Consumer<byte[]> consumer;
 
-    public MyChannelHandler(Consumer<String> consumer) {
+    public MyChannelHandler(Consumer<byte[]> consumer) {
         this.consumer = consumer;
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String realMsg=(String)msg;
-        System.out.println(realMsg);
-        consumer.accept(realMsg);
+         byte[]bytes=ByteBufUtil.getBytes((ByteBuf) msg);
+         System.out.println("收到数据，长度="+bytes.length);
+         consumer.accept(bytes);
     }
 
 

@@ -29,9 +29,9 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline=ch.pipeline();
-        ByteBuf delimiter= Unpooled.copiedBuffer(delimiterStr.getBytes());
-        DelimiterBasedFrameDecoder decoder=new DelimiterBasedFrameDecoder(10000,delimiter);
-        pipeline.addLast("frame",decoder);
+//        ByteBuf delimiter= Unpooled.copiedBuffer(delimiterStr.getBytes());
+//        DelimiterBasedFrameDecoder decoder=new DelimiterBasedFrameDecoder(10000,delimiter);
+//        pipeline.addLast("frame",decoder);
 
         channelHandler.forEach(handler->pipeline.addLast(handler));
 
